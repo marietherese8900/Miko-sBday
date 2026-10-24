@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 7th Birthday Michael!</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    :root {
+      --barca-blue: #004d98;
+      --barca-red: #a50044;
+      --gold: #ffed00;
+      --dark-blue: #0a192f;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--barca-blue) 0%, var(--dark-blue) 50%, var(--barca-red) 100%);
+      color: white;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 3px solid var(--gold);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 500px;
+      margin: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .badge {
+      background-color: var(--gold);
+      color: var(--barca-blue);
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 8px 18px;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin: 10px 0;
+      color: #ffffff;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    .yamal-number {
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--gold);
+      margin: 10px 0;
+      text-shadow: 4px 4px 0px var(--barca-red);
+    }
+
+    button {
+      background: linear-gradient(45deg, #ffed00, #ffaa00);
+      color: #000;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(255, 237, 0, 0.4);
+    }
+
+    button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(255, 237, 0, 0.6);
+    }
+
+    .scoreboard {
+      margin-top: 25px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: rgba(0,0,0,0.3);
+      padding: 10px 20px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="badge">Star Player Alert ⚽</div>
+    <h1>HAPPY 7th BIRTHDAY MICHAEL!</h1>
+    
+    <div class="yamal-number">7</div>
+
+    <p>Wishing the future football superstar an incredible day filled with goals, skills, and tricks—just like <strong>Lamine Yamal</strong>!</p>
+
+    <button onclick="scoreGoal()">⚽ SCORE A GOAL!</button>
+
+    <div class="scoreboard">
+      Goals Scored Today: <span id="goalCount" style="color: var(--gold);">0</span>
+    </div>
+  </div>
+
+  <script>
+    // Trigger initial confetti explosion on load
+    window.onload = function() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    };
+
+    let goals = 0;
+    function scoreGoal() {
+      goals++;
+      document.getElementById('goalCount').innerText = goals;
+      
+      // Celebrate with custom gold/blue/red confetti
+      confetti({
+        particleCount: 50,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: ['#004d98', '#a50044', '#ffed00']
+      });
+      confetti({
+        particleCount: 50,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: ['#004d98', '#a50044', '#ffed00']
+      });
+    }
+  </script>
+
+</body>
+</html>
