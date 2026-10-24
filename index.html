@@ -153,6 +153,7 @@
 
 </body>
 </html>-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -189,8 +190,8 @@
       border: 3px solid var(--gold);
       border-radius: 24px;
       padding: 25px;
-      max-width: 520px;
-      width: 90%;
+      max-width: 550px;
+      width: 92%;
       box-shadow: 0 12px 40px rgba(0,0,0,0.6);
       position: relative;
     }
@@ -208,109 +209,141 @@
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       margin: 12px 0 5px;
       color: #ffffff;
       text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
     }
 
-    /* Interactive Game Stadium Area */
+    /* Pitch Container */
     .pitch {
       position: relative;
       background: linear-gradient(0deg, #1e7e34 0%, #28a745 100%);
       border: 3px solid white;
       border-radius: 16px;
-      height: 220px;
+      height: 230px;
       margin: 20px 0;
       overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      padding: 0 20px;
     }
 
-    /* Goal Net at the right */
+    /* Player Avatar Styling */
+    .player {
+      position: absolute;
+      bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80px;
+      transition: transform 0.2s ease;
+      z-index: 2;
+    }
+
+    .player-lamine {
+      left: 10px;
+    }
+
+    .player-miko {
+      left: 210px;
+    }
+
+    .avatar-head {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      object-fit: cover;
+      background-color: white;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+    }
+
+    .avatar-body {
+      width: 42px;
+      height: 48px;
+      background: linear-gradient(90deg, var(--barca-blue) 50%, var(--barca-red) 50%);
+      border-radius: 6px 6px 0 0;
+      margin-top: -6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--gold);
+      border: 1px solid rgba(255,255,255,0.3);
+      text-shadow: 1px 1px 2px black;
+    }
+
+    .player-tag {
+      background: rgba(0, 0, 0, 0.75);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+      margin-top: 3px;
+      white-space: nowrap;
+    }
+
+    /* Kicking Animation */
+    .kick-action {
+      transform: scale(1.15) translateY(-5px);
+    }
+
+    /* Goal Net */
     .goal-net {
       position: absolute;
-      right: 10px;
-      bottom: 20px;
-      width: 50px;
-      height: 100px;
+      right: 5px;
+      bottom: 15px;
+      width: 55px;
+      height: 110px;
       border: 3px solid white;
       border-left: none;
       background: repeating-linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.2) 5px, transparent 5px, transparent 10px);
     }
 
-    /* Transparent Player Silhouette with Name Tag */
-    .yamal-player {
-      width: 90px;
-      height: 110px;
-      position: absolute;
-      left: 15px;
-      bottom: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.2s ease;
-    }
-
-    .player-graphic {
-      width: 75px;
-      height: 85px;
-      fill: var(--gold);
-      filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.5));
-    }
-
-    .player-tag {
-      background: var(--barca-red);
-      color: white;
-      font-size: 0.75rem;
-      font-weight: bold;
-      padding: 2px 8px;
-      border-radius: 10px;
-      border: 1px solid var(--gold);
-      margin-top: 2px;
-      white-space: nowrap;
-    }
-
-    .kick-action {
-      transform: translateX(35px) rotate(15deg) scale(1.1);
-    }
-
-    /* Interactive Football */
+    /* Football */
     .ball {
-      font-size: 2.8rem;
+      font-size: 2.2rem;
       position: absolute;
-      left: 105px;
+      left: 80px;
       bottom: 20px;
       cursor: pointer;
       user-select: none;
-      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: all 0.6s ease-in-out;
+      z-index: 3;
     }
 
-    .ball-kick {
-      left: 360px !important;
+    /* Ball Trajectory Classes */
+    .ball-pass {
+      left: 200px !important;
+      bottom: 20px !important;
+      transform: rotate(360deg);
+    }
+
+    .ball-score {
+      left: 450px !important;
       bottom: 60px !important;
-      transform: rotate(720deg) scale(0.7);
+      transform: rotate(1080deg) scale(0.7);
     }
 
-    /* Goal Popup Banner */
+    /* Goal Banner */
     .goal-banner {
       position: absolute;
       top: 35%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0);
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 900;
       color: var(--gold);
       text-shadow: 4px 4px var(--barca-red), -2px -2px 0 #000;
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       pointer-events: none;
       z-index: 10;
+      width: 100%;
     }
 
     .goal-banner.show {
-      transform: translate(-50%, -50%) scale(1.2);
+      transform: translate(-50%, -50%) scale(1.1);
     }
 
     .btn-group {
@@ -357,25 +390,32 @@
 <body>
 
   <div class="card">
-    <div class="badge">Football Star ⚽</div>
-    <h1>HAPPY BIRTHDAY MICHAEL!</h1>
+    <div class="badge">FC Barcelona Dream Team ⚽</div>
+    <h1>HAPPY 7th BIRTHDAY MICHAEL!</h1>
 
     <div class="pitch">
-      <!-- Transparent Vector Player Graphic -->
-      <div id="yamal" class="yamal-player">
-        <svg class="player-graphic" viewBox="0 0 24 24">
-          <path d="M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6A2,2 0 0,1 10,4A2,2 0 0,1 12,2M10.5,8H13.5A1.5,1.5 0 0,1 15,9.5V13H13.5V21H10.5V13H9V9.5A1.5,1.5 0 0,1 10.5,8M6,10H8V22H6V10M16,10H18V22H16V10Z"/>
-        </svg>
-        <div class="player-tag">Micheal Fakhry</div>
+      <!-- Lamine Yamal Player -->
+      <div id="lamine" class="player player-lamine">
+        <img class="avatar-head" src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcTs-PAGEQmLyioAwLBlYaD9YfUhFilcDdKqLW1w3b_lD0aSzRQQtOQHO_jh9EE3rtc9F4EezPCYAaWrP34" alt="Lamine Yamal">
+        <div class="avatar-body">19</div>
+        <div class="player-tag">Lamine Yamal</div>
       </div>
 
-      <div id="ball" class="ball" onclick="kickBall()">⚽</div>
+      <!-- Michael (Miko) Player -->
+      <div id="miko" class="player player-miko">
+        <img class="avatar-head" src="https://api.dicebear.com/7.x/bottts/svg?seed=Michael" alt="Michael Head">
+        <div class="avatar-body">7</div>
+        <div class="player-tag">Miko (Michael)</div>
+      </div>
+
+      <div id="ball" class="ball" onclick="playAssistAndGoal()">⚽</div>
       <div class="goal-net"></div>
-      <div id="goalBanner" class="goal-banner">GOAAAAAL! 🎉</div>
+      <div id="goalBanner" class="goal-banner">ASSIST BY YAMAL!<br>GOAL BY MICHAEL! 🎉</div>
     </div>
 
     <div class="btn-group">
-      <button onclick="kickBall()">⚽ TAP TO KICK & SCORE!</button>
+      <button onclick="playAssistAndGoal()">⚽ PASS FROM YAMAL & SCORE!</button>
+      <button class="btn-voice" onclick="speakGreeting()">🗣️ HEAR LAMINE'S BIRTHDAY MESSAGE</button>
     </div>
 
     <div class="scoreboard">
@@ -385,47 +425,67 @@
 
   <script>
     let goals = 0;
-    let isKicking = false;
+    let isPlaying = false;
 
     window.onload = function() {
       confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
     };
 
-    function kickBall() {
-      if (isKicking) return;
-      isKicking = true;
+    function playAssistAndGoal() {
+      if (isPlaying) return;
+      isPlaying = true;
 
       const ball = document.getElementById('ball');
-      const yamal = document.getElementById('yamal');
+      const lamine = document.getElementById('lamine');
+      const miko = document.getElementById('miko');
       const banner = document.getElementById('goalBanner');
 
-      yamal.classList.add('kick-action');
+      // Step 1: Lamine Yamal passes to Michael
+      lamine.classList.add('kick-action');
+      ball.classList.add('ball-pass');
 
+      // Step 2: Ball arrives at Michael, Michael shoots into the net
       setTimeout(() => {
-        ball.classList.add('ball-kick');
-      }, 100);
+        lamine.classList.remove('kick-action');
+        miko.classList.add('kick-action');
+        ball.classList.remove('ball-pass');
+        ball.classList.add('ball-score');
+      }, 650);
 
+      // Step 3: Goal scored celebration
       setTimeout(() => {
+        miko.classList.remove('kick-action');
         goals++;
         document.getElementById('goalCount').innerText = goals;
         banner.classList.add('show');
 
         confetti({
-          particleCount: 70,
-          spread: 60,
-          origin: { x: 0.8, y: 0.5 },
+          particleCount: 80,
+          spread: 70,
+          origin: { x: 0.85, y: 0.5 },
           colors: ['#004d98', '#a50044', '#ffed00']
         });
-      }, 500);
+      }, 1200);
 
+      // Step 4: Reset pitch position for next try
       setTimeout(() => {
         banner.classList.remove('show');
-        ball.classList.remove('ball-kick');
-        yamal.classList.remove('kick-action');
-        isKicking = false;
-      }, 1800);
+        ball.classList.remove('ball-score');
+        isPlaying = false;
+      }, 2600);
     }
 
+    function speakGreeting() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance("Happy 7th Birthday Michael! Great goal from my pass!");
+        msg.rate = 0.95;
+        msg.pitch = 1.1;
+        window.speechSynthesis.speak(msg);
+      } else {
+        alert("Audio speech is not supported on this browser.");
+      }
+    }
   </script>
 
 </body>
