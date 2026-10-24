@@ -232,6 +232,7 @@
   </style>
 </head>
 <body>
+  <audio id="birthdayVoice" src="voice.mp3" preload="auto"></audio>
 
   <div class="card">
     <div class="badge">FC Barcelona Dream Team ⚽</div>
@@ -259,7 +260,7 @@
 
     <div class="btn-group">
       <button onclick="playAssistAndGoal()">⚽ SCORE A GOAL!</button>
-      <button class="btn-voice" onclick="speakGreeting()">🗣️ HEAR LAMINE'S BIRTHDAY MESSAGE</button>
+      <button class="btn-voice" onclick="playVoice()">🗣️ LISTEN TO BIRTHDAY MESSAGE</button>
     </div>
 
     <div class="scoreboard">
@@ -319,17 +320,15 @@
       }, 2600);
     }
 
-    function speakGreeting() {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const msg = new SpeechSynthesisUtterance("Happy 7th Birthday Michael! Great goal from my pass!");
-        msg.rate = 0.95;
-        msg.pitch = 1.1;
-        window.speechSynthesis.speak(msg);
-      } else {
-        alert("Audio speech is not supported on this browser.");
-      }
-    }
+    function playVoice() {
+  const audio = document.getElementById('birthdayVoice');
+  if (audio) {
+    audio.currentTime = 0;
+    audio.play().catch(function(e) {
+      alert("Please tap the screen first, then try the voice button again!");
+    });
+  }
+}
   </script>
 
 </body>
