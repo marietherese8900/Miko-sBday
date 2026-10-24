@@ -357,8 +357,8 @@
 <body>
 
   <div class="card">
-    <div class="badge">FC Barcelona Star ⚽</div>
-    <h1>HAPPY 7th BIRTHDAY MICHAEL!</h1>
+    <div class="badge">Football Star ⚽</div>
+    <h1>HAPPY BIRTHDAY MICHAEL!</h1>
 
     <div class="pitch">
       <!-- Transparent Vector Player Graphic -->
@@ -366,7 +366,7 @@
         <svg class="player-graphic" viewBox="0 0 24 24">
           <path d="M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6A2,2 0 0,1 10,4A2,2 0 0,1 12,2M10.5,8H13.5A1.5,1.5 0 0,1 15,9.5V13H13.5V21H10.5V13H9V9.5A1.5,1.5 0 0,1 10.5,8M6,10H8V22H6V10M16,10H18V22H16V10Z"/>
         </svg>
-        <div class="player-tag">Lamine Yamal</div>
+        <div class="player-tag">Micheal Fakhry</div>
       </div>
 
       <div id="ball" class="ball" onclick="kickBall()">⚽</div>
@@ -376,7 +376,6 @@
 
     <div class="btn-group">
       <button onclick="kickBall()">⚽ TAP TO KICK & SCORE!</button>
-      <button class="btn-voice" onclick="speakGreeting()">🗣️ HEAR LAMINE'S BIRTHDAY MESSAGE</button>
     </div>
 
     <div class="scoreboard">
@@ -427,17 +426,6 @@
       }, 1800);
     }
 
-    function speakGreeting() {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const msg = new SpeechSynthesisUtterance("Happy 7th Birthday Michael! Keep scoring goals like Lamine Yamal!");
-        msg.rate = 0.95;
-        msg.pitch = 1.1;
-        window.speechSynthesis.speak(msg);
-      } else {
-        alert("Audio speech is not supported on this browser.");
-      }
-    }
   </script>
 
 </body>
