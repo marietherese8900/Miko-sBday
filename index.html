@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!---<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -148,6 +148,272 @@
         origin: { x: 1 },
         colors: ['#004d98', '#a50044', '#ffed00']
       });
+    }
+  </script>
+
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 7th Birthday Michael!</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    :root {
+      --barca-blue: #004d98;
+      --barca-red: #a50044;
+      --gold: #ffed00;
+      --dark-blue: #0a192f;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, var(--barca-blue) 0%, var(--dark-blue) 50%, var(--barca-red) 100%);
+      color: white;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      border: 3px solid var(--gold);
+      border-radius: 24px;
+      padding: 25px;
+      max-width: 520px;
+      width: 90%;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    .badge {
+      background-color: var(--gold);
+      color: var(--barca-blue);
+      font-size: 1.1rem;
+      font-weight: 800;
+      padding: 8px 20px;
+      border-radius: 50px;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 12px 0 5px;
+      color: #ffffff;
+      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Interactive Game Stadium Area */
+    .pitch {
+      position: relative;
+      background: linear-gradient(0deg, #1e7e34 0%, #28a745 100%);
+      border: 3px solid white;
+      border-radius: 16px;
+      height: 220px;
+      margin: 20px 0;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    /* Goal Net at the right */
+    .goal-net {
+      position: absolute;
+      right: 10px;
+      bottom: 20px;
+      width: 50px;
+      height: 100px;
+      border: 3px solid white;
+      border-left: none;
+      background: repeating-linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.2) 5px, transparent 5px, transparent 10px);
+    }
+
+    /* Animated Yamal Silhouette / Character */
+    .yamal-player {
+      width: 80px;
+      height: 110px;
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      background: url('https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTO_D_bCViOAjnKvrj2OvSP-HZDdGAoiR3aik_CsAynKoPbw26bIbZgh9vEvoDQEiw9gvv4byLNW3MD7BA') no-repeat center/contain;
+      transition: transform 0.2s ease;
+    }
+
+    .kick-action {
+      transform: translateX(30px) rotate(15deg) scale(1.1);
+    }
+
+    /* Interactive Football */
+    .ball {
+      font-size: 2.8rem;
+      position: absolute;
+      left: 100px;
+      bottom: 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .ball-kick {
+      left: 360px !important;
+      bottom: 60px !important;
+      transform: rotate(720deg) scale(0.7);
+    }
+
+    /* Goal Popup Banner */
+    .goal-banner {
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--gold);
+      text-shadow: 4px 4px var(--barca-red), -2px -2px 0 #000;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+    }
+
+    .goal-banner.show {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    button {
+      background: linear-gradient(45deg, #ffed00, #ffaa00);
+      color: #000;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(255, 237, 0, 0.4);
+      transition: transform 0.1s;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+
+    .btn-voice {
+      background: linear-gradient(45deg, var(--barca-red), #e6005c);
+      color: white;
+      box-shadow: 0 4px 15px rgba(165, 0, 68, 0.4);
+    }
+
+    .scoreboard {
+      margin-top: 15px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      background: rgba(0,0,0,0.4);
+      padding: 8px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="badge">FC Barcelona Star ⚽</div>
+    <h1>HAPPY 7th BIRTHDAY MICHAEL!</h1>
+
+    <div class="pitch">
+      <div id="yamal" class="yamal-player"></div>
+      <div id="ball" class="ball" onclick="kickBall()">⚽</div>
+      <div class="goal-net"></div>
+      <div id="goalBanner" class="goal-banner">GOAAAAAL! 🎉</div>
+    </div>
+
+    <div class="btn-group">
+      <button onclick="kickBall()">⚽ TAP TO KICK & SCORE!</button>
+      <button class="btn-voice" onclick="speakGreeting()">🗣️ HEAR LAMINE'S BIRTHDAY MESSAGE</button>
+    </div>
+
+    <div class="scoreboard">
+      Michael's Goals Scored: <span id="goalCount" style="color: var(--gold);">0</span>
+    </div>
+  </div>
+
+  <script>
+    let goals = 0;
+    let isKicking = false;
+
+    // Confetti burst on start
+    window.onload = function() {
+      confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+    };
+
+    function kickBall() {
+      if (isKicking) return;
+      isKicking = true;
+
+      const ball = document.getElementById('ball');
+      const yamal = document.getElementById('yamal');
+      const banner = document.getElementById('goalBanner');
+
+      // 1. Move Yamal to kick position
+      yamal.classList.add('kick-action');
+
+      // 2. Shoot ball toward the net
+      setTimeout(() => {
+        ball.classList.add('ball-kick');
+      }, 100);
+
+      // 3. Goal animation & confetti explosion
+      setTimeout(() => {
+        goals++;
+        document.getElementById('goalCount').innerText = goals;
+        banner.classList.add('show');
+
+        confetti({
+          particleCount: 70,
+          spread: 60,
+          origin: { x: 0.8, y: 0.5 },
+          colors: ['#004d98', '#a50044', '#ffed00']
+        });
+      }, 500);
+
+      // 4. Reset position for next shot
+      setTimeout(() => {
+        banner.classList.remove('show');
+        ball.classList.remove('ball-kick');
+        yamal.classList.remove('kick-action');
+        isKicking = false;
+      }, 1800);
+    }
+
+    // Voice greeting simulation using Web Speech API
+    function speakGreeting() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Stop active audio
+        const msg = new SpeechSynthesisUtterance("Happy 7th Birthday Michael! Keep scoring goals like Lamine Yamal!");
+        msg.rate = 0.95;
+        msg.pitch = 1.1;
+        window.speechSynthesis.speak(msg);
+      } else {
+        alert("Audio speech is not supported on this browser.");
+      }
     }
   </script>
 
