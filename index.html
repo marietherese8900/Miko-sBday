@@ -241,26 +241,47 @@
       background: repeating-linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.2) 5px, transparent 5px, transparent 10px);
     }
 
-    /* Animated Yamal Silhouette / Character */
+    /* Transparent Player Silhouette with Name Tag */
     .yamal-player {
-      width: 80px;
+      width: 90px;
       height: 110px;
       position: absolute;
-      left: 20px;
+      left: 15px;
       bottom: 20px;
-      background: url('https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTO_D_bCViOAjnKvrj2OvSP-HZDdGAoiR3aik_CsAynKoPbw26bIbZgh9vEvoDQEiw9gvv4byLNW3MD7BA') no-repeat center/contain;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       transition: transform 0.2s ease;
     }
 
+    .player-graphic {
+      width: 75px;
+      height: 85px;
+      fill: var(--gold);
+      filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.5));
+    }
+
+    .player-tag {
+      background: var(--barca-red);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
     .kick-action {
-      transform: translateX(30px) rotate(15deg) scale(1.1);
+      transform: translateX(35px) rotate(15deg) scale(1.1);
     }
 
     /* Interactive Football */
     .ball {
       font-size: 2.8rem;
       position: absolute;
-      left: 100px;
+      left: 105px;
       bottom: 20px;
       cursor: pointer;
       user-select: none;
@@ -285,6 +306,7 @@
       text-shadow: 4px 4px var(--barca-red), -2px -2px 0 #000;
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       pointer-events: none;
+      z-index: 10;
     }
 
     .goal-banner.show {
@@ -339,7 +361,14 @@
     <h1>HAPPY 7th BIRTHDAY MICHAEL!</h1>
 
     <div class="pitch">
-      <div id="yamal" class="yamal-player"></div>
+      <!-- Transparent Vector Player Graphic -->
+      <div id="yamal" class="yamal-player">
+        <svg class="player-graphic" viewBox="0 0 24 24">
+          <path d="M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6A2,2 0 0,1 10,4A2,2 0 0,1 12,2M10.5,8H13.5A1.5,1.5 0 0,1 15,9.5V13H13.5V21H10.5V13H9V9.5A1.5,1.5 0 0,1 10.5,8M6,10H8V22H6V10M16,10H18V22H16V10Z"/>
+        </svg>
+        <div class="player-tag">Lamine Yamal</div>
+      </div>
+
       <div id="ball" class="ball" onclick="kickBall()">⚽</div>
       <div class="goal-net"></div>
       <div id="goalBanner" class="goal-banner">GOAAAAAL! 🎉</div>
@@ -359,7 +388,6 @@
     let goals = 0;
     let isKicking = false;
 
-    // Confetti burst on start
     window.onload = function() {
       confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
     };
@@ -372,15 +400,12 @@
       const yamal = document.getElementById('yamal');
       const banner = document.getElementById('goalBanner');
 
-      // 1. Move Yamal to kick position
       yamal.classList.add('kick-action');
 
-      // 2. Shoot ball toward the net
       setTimeout(() => {
         ball.classList.add('ball-kick');
       }, 100);
 
-      // 3. Goal animation & confetti explosion
       setTimeout(() => {
         goals++;
         document.getElementById('goalCount').innerText = goals;
@@ -394,7 +419,6 @@
         });
       }, 500);
 
-      // 4. Reset position for next shot
       setTimeout(() => {
         banner.classList.remove('show');
         ball.classList.remove('ball-kick');
@@ -403,10 +427,9 @@
       }, 1800);
     }
 
-    // Voice greeting simulation using Web Speech API
     function speakGreeting() {
       if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); // Stop active audio
+        window.speechSynthesis.cancel();
         const msg = new SpeechSynthesisUtterance("Happy 7th Birthday Michael! Keep scoring goals like Lamine Yamal!");
         msg.rate = 0.95;
         msg.pitch = 1.1;
